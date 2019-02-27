@@ -1,6 +1,8 @@
 #!/usr/bin/python
 
 # example virtual base jump
+from __future__ import absolute_import
+from __future__ import print_function
 import math
 from lxml import etree
 from pykml.parser import Schema
@@ -96,8 +98,8 @@ for t in drange(0,15,tstep):
     
 
 assert Schema('kml22gx.xsd').validate(tour_doc)
-print etree.tostring(tour_doc, pretty_print=True)
+print(etree.tostring(tour_doc, pretty_print=True))
 
 # output a KML file (named based on the Python script)
-outfile = file(__file__.rstrip('.py')+'.kml','w')
+outfile = open(__file__.rstrip('.py')+'.kml','w')
 outfile.write(etree.tostring(tour_doc, pretty_print=True))

@@ -9,6 +9,8 @@ KML objects with the appropriate namespace prefixes.
 .. _lxml's ElementMaker factory: http://lxml.de/objectify.html#tree-generation-with-the-e-factory
 '''
 
+from __future__ import absolute_import
+from __future__ import print_function
 from lxml import etree, objectify
 
 nsmap={
@@ -45,7 +47,7 @@ def get_factory_object_name(namespace):
         'http://www.google.com/kml/ext/2.2': 'GX'
     }
     if namespace:
-        if factory_map.has_key(namespace):
+        if namespace in factory_map:
             factory_object_name = factory_map[namespace]
         else:
             factory_object_name = None
@@ -185,7 +187,7 @@ def write_python_script_for_kml_document(doc):
 
 def kml2pykml():
     "Parse a KML file and generates a pyKML script"
-    import urllib2
+    import six.moves.urllib.request, six.moves.urllib.error, six.moves.urllib.parse
     from pykml.parser import parse
     from optparse import OptionParser
     
@@ -203,7 +205,7 @@ def kml2pykml():
             doc = parse(f, schema=None)
     except IOError:
         try:
-            f = urllib2.urlopen(uri)
+            f = six.moves.urllib.request.urlopen(uri)
             doc = parse(f, schema=None)
         finally:
             #pass
@@ -213,4 +215,4 @@ def kml2pykml():
                 pass #variable was not defined
             else:
                 f.close
-    print write_python_script_for_kml_document(doc)
+    print(write_python_script_for_kml_document(doc))

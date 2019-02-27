@@ -1,3 +1,4 @@
+from __future__ import absolute_import
 import unittest
 from pykml.factory import KML_ElementMaker as K
 from pykml.factory import ATOM_ElementMaker as ATOM

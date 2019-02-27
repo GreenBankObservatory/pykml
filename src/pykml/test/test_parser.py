@@ -1,6 +1,8 @@
+from __future__ import absolute_import
+from __future__ import print_function
 import unittest
 from os import path
-import urllib2
+import six.moves.urllib.request, six.moves.urllib.error, six.moves.urllib.parse
 from StringIO import StringIO
 from lxml import etree
 from pykml.parser import Schema
@@ -70,7 +72,7 @@ class ParseKmlOgcTestCase(unittest.TestCase):
         #url = 'http://code.google.com/apis/kml/documentation/kmlfiles/altitudemode_reference.kml'
         #url = 'http://code.google.com/apis/kml/documentation/kmlfiles/animatedupdate_example.kml'
         try:
-            fileobject = urllib2.urlopen(url)
+            fileobject = six.moves.urllib.request.urlopen(url)
             tree = parse(fileobject, schema=Schema("ogckml22.xsd"))
             self.assertEquals(
                 etree.tostring(tree)[:78],
@@ -78,8 +80,8 @@ class ParseKmlOgcTestCase(unittest.TestCase):
                   '<Document>'
                     '<name>KML Samples</name>'
             )
-        except urllib2.URLError:
-            print 'Unable to access the URL. Skipping test...'
+        except six.moves.urllib.error.URLError:
+            print('Unable to access the URL. Skipping test...')
     
     def test_parse_kml_file_with_cdata(self):
         "Tests the parsing of a local KML file, with a CDATA description string"
@@ -143,11 +145,11 @@ class ParseKmlOgcTestCase(unittest.TestCase):
         """
         url = 'http://code.google.com/apis/kml/documentation/kmlfiles/altitudemode_reference.kml'
         try:
-            fileobject = urllib2.urlopen(url)
+            fileobject = six.moves.urllib.request.urlopen(url)
             tree = parse(fileobject, schema=Schema("ogckml22.xsd"))
             self.assertTrue(False)
-        except urllib2.URLError:
-            print 'Unable to access the URL. Skipping test...'
+        except six.moves.urllib.error.URLError:
+            print('Unable to access the URL. Skipping test...')
         except etree.XMLSyntaxError:
             self.assertTrue(True)
         except:
@@ -161,7 +163,7 @@ class ParseKmlGxTestCase(unittest.TestCase):
         "Tests the parsing of a KML URL"
         url = 'http://code.google.com/apis/kml/documentation/kmlfiles/altitudemode_reference.kml'
         try:
-            fileobject = urllib2.urlopen(url)
+            fileobject = six.moves.urllib.request.urlopen(url)
             tree = parse(fileobject, schema=Schema('kml22gx.xsd'))
             self.assertEquals(
                 etree.tostring(tree)[:185],
@@ -171,8 +173,8 @@ class ParseKmlGxTestCase(unittest.TestCase):
                     '<Placemark>'
                       '<name>gx:altitudeMode Example</name>'
             )
-        except urllib2.URLError:
-            print 'Unable to access the URL. Skipping test...'
+        except six.moves.urllib.error.URLError:
+            print('Unable to access the URL. Skipping test...')
     
     def test_parse_kml_file(self):
         "Tests the parsing of a local KML file, with validation"
@@ -196,7 +198,7 @@ class ParseKmlGxTestCase(unittest.TestCase):
         "Tests the parsing of a KML URL"
         url = 'http://code.google.com/apis/kml/documentation/kmlfiles/animatedupdate_example.kml'
         try:
-            fileobject = urllib2.urlopen(url)
+            fileobject = six.moves.urllib.request.urlopen(url)
             tree = parse(fileobject, schema=Schema('kml22gx.xsd'))
             self.assertEquals(
                 etree.tostring(tree)[:137],
@@ -205,8 +207,8 @@ class ParseKmlGxTestCase(unittest.TestCase):
                     '<Document>'
                       '<name>gx:AnimatedUpdate example</name>'
             )
-        except urllib2.URLError:
-            print 'Unable to access the URL. Skipping test...'
+        except six.moves.urllib.error.URLError:
+            print('Unable to access the URL. Skipping test...')
 
 if __name__ == '__main__':
     unittest.main()

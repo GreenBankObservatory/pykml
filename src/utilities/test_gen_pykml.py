@@ -98,17 +98,16 @@ doc = KML.kml(
     id="transYellowPoly",    ),
     KML.Style(
       KML.BalloonStyle(
-        KML.text("
+        KML.text("""
           <b>$[name]</b>
           <br /><br />
           $[description]
-        "),
+        """),
       ),
     id="noDrivingDirections",    ),
     KML.Folder(
       KML.name("Placemarks"),
-      KML.description("These are just some of the different kinds of placemarks with
-        which you can mark your favorite places"),
+      KML.description("These are just some of the different kinds of placemarks with which you can mark your favorite places"),
       KML.LookAt(
         KML.longitude("-122.0839597145766"),
         KML.latitude("37.42222904525232"),
@@ -119,8 +118,7 @@ doc = KML.kml(
       ),
       KML.Placemark(
         KML.name("Simple placemark"),
-        KML.description("Attached to the ground. Intelligently places itself at the
-          height of the underlying terrain."),
+        KML.description("Attached to the ground. Intelligently places itself at the height of the underlying terrain."),
         KML.Point(
           KML.coordinates("-122.0822035425683,37.42228990140251,0"),
         ),
@@ -146,8 +144,7 @@ doc = KML.kml(
       KML.Placemark(
         KML.name("Extruded placemark"),
         KML.visibility("0"),
-        KML.description("Tethered to the ground by a customizable
-          "tail""),
+        KML.description("Tethered to the ground by a customizable tail"),
         KML.LookAt(
           KML.longitude("-122.0845787421525"),
           KML.latitude("37.42215078737763"),
@@ -167,8 +164,7 @@ doc = KML.kml(
     KML.Folder(
       KML.name("Styles and Markup"),
       KML.visibility("0"),
-      KML.description("With KML it is easy to create rich, descriptive markup to
-        annotate and enrich your placemarks"),
+      KML.description("With KML it is easy to create rich, descriptive markup to annotate and enrich your placemarks"),
       KML.LookAt(
         KML.longitude("-122.0845787422371"),
         KML.latitude("37.42215078726837"),
@@ -181,8 +177,7 @@ doc = KML.kml(
       KML.Document(
         KML.name("Highlighted Icon"),
         KML.visibility("0"),
-        KML.description("Place your mouse over the icon to see it display the new
-          icon"),
+        KML.description("Place your mouse over the icon to see it display the new icon"),
         KML.LookAt(
           KML.longitude("-122.0856552124024"),
           KML.latitude("37.4224281311035"),
@@ -227,7 +222,7 @@ doc = KML.kml(
       KML.Placemark(
         KML.name("Descriptive HTML"),
         KML.visibility("0"),
-        KML.description("Click on the blue link!<br><br>
+        KML.description("""Click on the blue link!<br><br>
 Placemark descriptions can be enriched by using many standard HTML tags.<br>
 For example:
 <hr>
@@ -325,7 +320,7 @@ Simple Tables:<br>
 <tr><td>a</td><td>b</td><td>c</td><td>d</td><td>e</td></tr>
 </table>
 <br>
-[Did you notice that double-clicking on the placemark doesn't cause the viewer to take you anywhere? This is because it is possible to directly author a "placeless placemark". If you look at the code for this example, you will see that it has neither a point coordinate nor a LookAt element.]"),
+[Did you notice that double-clicking on the placemark doesn't cause the viewer to take you anywhere? This is because it is possible to directly author a "placeless placemark". If you look at the code for this example, you will see that it has neither a point coordinate nor a LookAt element.]"""),
       ),
     ),
     KML.Folder(

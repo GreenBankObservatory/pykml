@@ -9,6 +9,7 @@ highlighted tracebacks.
 # Needed modules
 
 # Standard library
+from __future__ import absolute_import
 import re
 
 # Third party

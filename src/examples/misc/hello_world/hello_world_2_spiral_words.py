@@ -1,8 +1,11 @@
 #!/usr/bin/python
 
+from __future__ import absolute_import
+from __future__ import print_function
 from lxml import etree
 from pykml.factory import KML_ElementMaker as KML
 from math import cos, sin, radians
+from six.moves import range
 
 kmlobj = KML.kml(
     KML.Document()
@@ -24,4 +27,4 @@ for i in range(0,360*2,10):
         )
     )
 
-print etree.tostring(etree.ElementTree(kmlobj),pretty_print=True)
+print(etree.tostring(etree.ElementTree(kmlobj),pretty_print=True))

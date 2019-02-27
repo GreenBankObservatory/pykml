@@ -3,7 +3,9 @@
 The pykml.utility module provides utility functions that operate on KML 
 documents
 """
+from __future__ import absolute_import
 import re
+import six
 
 def clean_xml_string(input_string):
     '''removes invalid characters from an XML string'''
@@ -20,7 +22,7 @@ def format_xml_with_cdata(
     root = etree.fromstring(etree.tostring(etree.ElementTree(obj)))
     
     #Create an xpath expression to search for all desired cdata elements
-    xpath = '|'.join(map(lambda tag: '//kml:' + tag, cdata_elements))
+    xpath = '|'.join(['//kml:' + tag for tag in cdata_elements])
     
     results = root.xpath(
         xpath,
@@ -39,9 +41,9 @@ def count_elements(doc):
         except:
             namespace = None
             element_name = el.tag
-        if not summary.has_key(namespace):
+        if namespace not in summary:
             summary[namespace] = {}
-        if not summary[namespace].has_key(element_name):
+        if element_name not in summary[namespace]:
             summary[namespace][element_name] = 1
         else:
             summary[namespace][element_name] += 1
@@ -195,27 +197,27 @@ def convert_csv_to_kml(
         )    
     for row in csvdoc:
         pm = KML.Placemark()
-        if row.has_key(name_field):
+        if name_field in row:
             pm.append(
                 KML.name(clean_xml_string(row[name_field]))
             )
-        if row.has_key(snippet_field):
+        if snippet_field in row:
             pm.append(
                 KML.Snippet(clean_xml_string(row[snippet_field]),maxLines="2")
             )
-        if row.has_key(description_field):
+        if description_field in row:
             pm.append(
                 KML.description(clean_xml_string(row[description_field]))
             )
         else:
             desc = '<table border="1"'
-            for key,val in row.iteritems():
+            for key,val in six.iteritems(row):
                 desc += '<tr><th>{0}</th><td>{1}</td></tr>'.format(key,val)
             desc += '</table>'
             pm.append(KML.description(clean_xml_string(desc)))
         
         coord_list = [row[longitude_field], row[latitude_field]]
-        if row.has_key(altitude_field):
+        if altitude_field in row:
             coord_list += [row[altitude_field]]
         pm.append(
             KML.Point(
@@ -232,7 +234,7 @@ def csv2kml():
     Example: csv2kml test.csv
     """
     import sys
-    import urllib2
+    import six.moves.urllib.request, six.moves.urllib.error, six.moves.urllib.parse
     from optparse import OptionParser
     from lxml import etree
     
@@ -263,7 +265,7 @@ def csv2kml():
         f = open(uri)
     except IOError:
         try:
-            f = urllib2.urlopen(uri)
+            f = six.moves.urllib.request.urlopen(uri)
         except ValueError:
             raise ValueError('unable to load URI {0}'.format(uri))
     except:

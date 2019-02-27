@@ -11,6 +11,8 @@ is not valid.
 * The <gx:duration> element should be the first subelement of <gx:FlyTo>
 '''
 
+from __future__ import absolute_import
+from __future__ import print_function
 from lxml import etree
 from pykml.parser import Schema
 from pykml.factory import KML_ElementMaker as KML
@@ -71,10 +73,10 @@ doc = KML.kml(
   )
 )
 
-print etree.tostring(doc, pretty_print=True)
+print(etree.tostring(doc, pretty_print=True))
 
 # output a KML file (named based on the Python script)
-outfile = file(__file__.rstrip('.py')+'.kml','w')
+outfile = open(__file__.rstrip('.py')+'.kml','w')
 outfile.write(etree.tostring(doc, pretty_print=True))
 
 schema = Schema('kml22gx.xsd')

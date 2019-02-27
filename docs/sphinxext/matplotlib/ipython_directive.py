@@ -1,7 +1,10 @@
+from __future__ import absolute_import
+from __future__ import print_function
 import sys, os, shutil, imp, warnings, cStringIO, re
 
 import IPython
 from IPython.Shell import MatplotlibShell
+from six.moves import range
 
 try:
     from hashlib import md5
@@ -20,7 +23,7 @@ sphinx_version = tuple([int(re.split('[a-z]', x)[0])
 
 
 
-COMMENT, INPUT, OUTPUT =  range(3)
+COMMENT, INPUT, OUTPUT =  list(range(3))
 rgxin = re.compile('In \[(\d+)\]:\s?(.*)\s*')
 rgxout = re.compile('Out\[(\d+)\]:\s?(.*)\s*')
 fmtin = 'In [%d]:'
@@ -338,9 +341,9 @@ def ipython_directive(name, arguments, options, content, lineno,
                       ):
 
     debug = ipython_directive.DEBUG
-    shell.is_suppress = options.has_key('suppress')
-    shell.is_doctest = options.has_key('doctest')
-    shell.is_verbatim = options.has_key('verbatim')
+    shell.is_suppress = 'suppress' in options
+    shell.is_doctest = 'doctest' in options
+    shell.is_verbatim = 'verbatim' in options
 
     #print 'ipy', shell.is_suppress, options
     parts = '\n'.join(content).split('\n\n')
@@ -366,7 +369,7 @@ def ipython_directive(name, arguments, options, content, lineno,
     #print lines
     if len(lines)>2:
         if debug:
-            print '\n'.join(lines)
+            print('\n'.join(lines))
         else:
             #print 'INSERTING %d lines'%len(lines)
             state_machine.insert_input(

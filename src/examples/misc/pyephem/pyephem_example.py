@@ -8,12 +8,15 @@ Example usage:
 python pyephem_example.py > test.kml
 '''
 
+from __future__ import absolute_import
+from __future__ import print_function
 from datetime import datetime, timedelta
 from math import pi, degrees, radians
 from operator import mod
 import ephem
 from lxml import etree
 from pykml.factory import KML_ElementMaker as KML
+from six.moves import range
 
 year = 2011
 month = 12
@@ -185,6 +188,6 @@ for i in data:
             )
         )
 
-print etree.tostring(doc, pretty_print=True)
+print(etree.tostring(doc, pretty_print=True))
 
 

@@ -1,8 +1,11 @@
 #!/usr/bin/python
 
+from __future__ import absolute_import
+from __future__ import print_function
 from lxml import etree
 from pykml.factory import KML_ElementMaker as KML
 from math import cosh
+from six.moves import range
 
 text = 'Hello World!'
 
@@ -40,4 +43,4 @@ for i in range(0,len(text)):
             )
         )
 
-print etree.tostring(etree.ElementTree(kmlobj),pretty_print=True)
+print(etree.tostring(etree.ElementTree(kmlobj),pretty_print=True))

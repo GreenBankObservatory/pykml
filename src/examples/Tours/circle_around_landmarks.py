@@ -2,11 +2,14 @@
 '''Generate a KML document of a tour based on rotating around locations.
 
 '''
+from __future__ import absolute_import
+from __future__ import print_function
 from pykml.factory import nsmap
 from pykml.factory import KML_ElementMaker as KML
 from pykml.factory import GX_ElementMaker as GX
 from pykml.parser import Schema
 from lxml import etree
+from six.moves import range
 
 # define a variable for the Google Extensions namespace URL string
 gxns = '{' + nsmap['gx'] + '}'
@@ -194,8 +197,8 @@ for feature in feature_list:
 # check that the KML document is valid using the Google Extension XML Schema
 assert(Schema("kml22gx.xsd").validate(tour_doc))
 
-print etree.tostring(tour_doc, pretty_print=True)
+print(etree.tostring(tour_doc, pretty_print=True))
 
 # output a KML file (named based on the Python script)
-outfile = file(__file__.rstrip('.py')+'.kml','w')
+outfile = open(__file__.rstrip('.py')+'.kml','w')
 outfile.write(etree.tostring(tour_doc, pretty_print=True))

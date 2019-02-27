@@ -1,3 +1,4 @@
+from __future__ import absolute_import
 import unittest
 from os import path
 from lxml import etree
@@ -6,6 +7,7 @@ from pykml.parser import parse
 from pykml.factory import KML_ElementMaker as KML
 from pykml.factory import ATOM_ElementMaker as ATOM
 from pykml.factory import GX_ElementMaker as GX
+from six.moves import zip
 
 
 def compare_etree(tree1, tree2):
